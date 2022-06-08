@@ -1,0 +1,230 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "Documentación del proyecto para la empresa de Helados Panda",
+      "version": "1.0.0",
+      "title": "PROYECTO SISTEMAS DISTRIBUIDOS   ",
+      "contact": {
+        "email": "gck2021537@est.univalle.edu"
+      },
+      "license": {
+        "name": "MIT"
+      }
+    },
+    "host": "localhost",
+    "basePath": "/univalle/v1",
+    "tags": [
+      {
+        "name": "DetallesVenta",
+        "description": "Toda la información de Detalle de venta"
+      }
+    ],
+    "schemes": [
+      "http"
+    ],
+    "paths": {
+      "/detalles": {
+        "get": {
+          "tags": [
+            "detallesVenta"
+          ],
+          "summary": "Lista de Detalles de venta",
+          "description": "",
+          "operationId": "list",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Lista del detalles de la empresa en ventas"
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "detallesVenta"
+          ],
+          "summary": "Añadir un nuevo registro de detalle en ventas",
+          "description": "",
+          "operationId": "addDetalleVenta",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Se añadira un Detalle",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/DetallreVenta"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Detalle de venta Creado"
+            }
+          }
+        }
+      },
+      "/detalles/{idDetalle}": {
+        "put": {
+          "tags": [
+            "detallesVenta"
+          ],
+          "summary": "Actualizar la información del Detalle de venta existente",
+          "description": "",
+          "operationId": "updateDetalleVenta",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "idVenta",
+              "in": "path",
+              "description": "Id del detalle de venta a modificar",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Se debe tener el registro del detalle para poder modificarlo",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/detalle"
+              }
+            }
+          ],
+          "responses": {
+            "202": {
+              "description": "Detalle Modificado"
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "detallesVenta"
+          ],
+          "summary": "Eliminar los resgitros del Detalle",
+          "description": "",
+          "operationId": "deleteDetalleVenta",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "idVenta",
+              "in": "path",
+              "description": "Id del detalle a eliminar",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "202": {
+              "description": "Detalle de venta Eliminado"
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "detalles"
+          ],
+          "summary": "Realizar la busqueda por medio del ID de detalle",
+          "description": "Verifique que el ID del detalle sea el correcto y este completo",
+          "operationId": "getOrderById",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "idVenta",
+              "in": "path",
+              "description": "ID para conocer los datos de detalle",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Se encontro con exito el registro",
+              "schema": {
+                "$ref": "#/definitions/detalle"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "detalle": {
+        "type": "object",
+        "required": [
+          "idCliente",
+          "idVendedor",
+          "direccion",
+          "telefono",
+          "productos",
+          "correoInstitucional",
+          "nit"
+        ],
+        "properties": {
+          "idVenta": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "properties": {
+            "idCliente": {
+              "type": "string",
+              "format": "uuid"
+            },
+          "idVendedor": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "direccion": {
+            "type": "string",
+            "example": "Av. Siempre Viva 742",
+            "description": "direccion de detalle de venta"
+          },
+          "telefono": {
+            "type": "number",
+            "example": "77229788",
+            "description": "telefono de detalle venta"
+          },
+          "productos": {
+            "type": "string",
+            "format": "array",
+            "example": [
+              "a",
+              "c",
+              "b"
+            ],
+            "description": "productos"
+          },
+          "correoInstitucional": {
+            "type": "string",
+            "example": "kelly.aide456@gmail.com",
+            "description": "Correo"
+          },
+          "nit": {
+            "type": "integer",
+            "example": "88776666",
+            "description": "nit del detalle de venta"
+          }
+          
+        }
+      }
+    }
+}}
